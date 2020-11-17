@@ -4,6 +4,8 @@ import click
 from google_drive_downloader import GoogleDriveDownloader as gdd
 from datetime import datetime
 import os
+import magic
+import moviepy.editor as moviepy
 
 TOKEN = "ad0ad723495c3659cae0ea1c65b50778249660a96d8fe3ae7b5fa1cdaa269eca53b22346885d8cf049412178561d66b0e1893c9571cddf2f82c7d1110f2ae9a4cac358d39487373bc99dcc65e972"
 PAGE_URL = "https://www.notion.so/silverjun/2020-39c8c4f395a94e828082361da8a7d529"
@@ -39,13 +41,26 @@ def NotionUpload(title, tag, video, images):
 
     now = datetime.now()
     date_time = now.strftime("%Y%m%d_%H%M%S")
-    filepostfix = title.replace(" ", "_")+date_time;
+    filepostfix = date_time;
     # /home/azureuser/notion_uploader/downloads/
-    basepath = "/home/azureuser/notion_uploader/downloads/"
-    gdd.download_file_from_google_drive(file_id=video.split('id=')[-1], dest_path=basepath+"video_"+filepostfix+".mp4")
+    basepath = "C:/Users/jange/Desktop/downloads/"
+    videoPath = basepath + "video_" + filepostfix
+    gdd.download_file_from_google_drive(file_id=video.split('id=')[-1], dest_path=videoPath)
+
+    fileType = magic.from_file(videoPath, mime=True)
+    print(fileType)
+    if fileType.find("mp4") == -1:  # mp4가 아닌경우
+        print("convert start")
+        clip = moviepy.VideoFileClip(videoPath)
+        videoPath += ".mp4"
+        clip.write_videofile(videoPath)
+        print("convert done")
+    else:
+        print("no need to convert")
+        videoPath += ".mp4"
 
     videoBlock = newVideoRow.children.add_new(VideoBlock)
-    videoBlock.upload_file(basepath+"video_"+filepostfix+".mp4")
+    videoBlock.upload_file(videoPath)
     # video.upload_file() -> 동영상 파일 embed
     # video.set_source_url() -> 유튜브와 같은 url 연결
 
@@ -64,7 +79,7 @@ def NotionUpload(title, tag, video, images):
         imageBlock.upload_file(basepath + "image_" + filepostfix)
 
     print("clean up...")
-    os.system("rm -f " + basepath+"video_"+filepostfix+".mp4")
+    os.system("rm -f " + videoPath)
     os.system("rm -f " + basepath + "image_" + filepostfix)
     print("clean up done")
 
