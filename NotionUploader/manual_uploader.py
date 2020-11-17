@@ -6,21 +6,12 @@ import os
 import magic
 import moviepy.editor as moviepy
 
-# import click
-
-
 TOKEN = "ad0ad723495c3659cae0ea1c65b50778249660a96d8fe3ae7b5fa1cdaa269eca53b22346885d8cf049412178561d66b0e1893c9571cddf2f82c7d1110f2ae9a4cac358d39487373bc99dcc65e972"
 PAGE_URL = "https://www.notion.so/silverjun/2020-39c8c4f395a94e828082361da8a7d529"
 DATA = [
-    "길원여고 임예진 탁구	https://drive.google.com/open?id=1ATeHM5TekVRXKs-m6QgYSdCGoDdTz0_w	https://drive.google.com/open?id=1hZxzvV77wECoKNjmVs0WxIYL0bwLfDBU	탁구",
+    ""
 ]
 
-
-# @click.command()
-# @click.argument('title')
-# @click.argument('tag')
-# @click.argument('video')
-# @click.option('--images', type=click.STRING, default=None)
 def NotionUpload(title, tag, video, images):
     print("Notion Uploader will upload with these:")
     print(title, end=' ')
@@ -48,6 +39,8 @@ def NotionUpload(title, tag, video, images):
     date_time = now.strftime("%Y%m%d_%H%M%S")
     filepostfix = date_time;
     # /home/azureuser/notion_uploader/downloads/
+    # C:/Users/jange/Desktop/downloads/
+    # basepath = "/home/azureuser/notion_uploader/downloads/"
     basepath = "C:/Users/jange/Desktop/downloads/"
     videoPath = basepath+"video_"+filepostfix
     gdd.download_file_from_google_drive(file_id=video.split('id=')[-1], dest_path=videoPath)
@@ -62,6 +55,7 @@ def NotionUpload(title, tag, video, images):
         print("convert done")
     else:
         print("no need to convert")
+        os.rename(videoPath, videoPath+".mp4")
         videoPath += ".mp4"
 
     videoBlock = newVideoRow.children.add_new(VideoBlock)

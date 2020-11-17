@@ -42,8 +42,8 @@ def NotionUpload(title, tag, video, images):
     now = datetime.now()
     date_time = now.strftime("%Y%m%d_%H%M%S")
     filepostfix = date_time;
-    # /home/azureuser/notion_uploader/downloads/
-    basepath = "C:/Users/jange/Desktop/downloads/"
+    basepath = "/home/azureuser/notion_uploader/downloads/"
+    # basepath = "C:/Users/jange/Desktop/downloads/"
     videoPath = basepath + "video_" + filepostfix
     gdd.download_file_from_google_drive(file_id=video.split('id=')[-1], dest_path=videoPath)
 
@@ -57,6 +57,7 @@ def NotionUpload(title, tag, video, images):
         print("convert done")
     else:
         print("no need to convert")
+        os.rename(videoPath, videoPath+".mp4")
         videoPath += ".mp4"
 
     videoBlock = newVideoRow.children.add_new(VideoBlock)
