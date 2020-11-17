@@ -1,19 +1,23 @@
 from notion.client import NotionClient
 from notion.block import HeaderBlock, VideoBlock, ImageBlock, CollectionViewBlock
-import click
 from google_drive_downloader import GoogleDriveDownloader as gdd
 from datetime import datetime
 import os
+# import click
+
 
 TOKEN = "ad0ad723495c3659cae0ea1c65b50778249660a96d8fe3ae7b5fa1cdaa269eca53b22346885d8cf049412178561d66b0e1893c9571cddf2f82c7d1110f2ae9a4cac358d39487373bc99dcc65e972"
 PAGE_URL = "https://www.notion.so/silverjun/2020-39c8c4f395a94e828082361da8a7d529"
+DATA = [
+    "복주초 철봉 매달리기 4학년 이예원	https://drive.google.com/open?id=1Vt3vVYsJPvqZV94_iEt5TCyjTZGQ20zY	https://drive.google.com/open?id=13bN49vEXMC8oGo0VSqj7dA94WJ2b8_Yi	매달리기",
+]
 
 
-@click.command()
-@click.argument('title')
-@click.argument('tag')
-@click.argument('video')
-@click.option('--images', type=click.STRING, default=None)
+# @click.command()
+# @click.argument('title')
+# @click.argument('tag')
+# @click.argument('video')
+# @click.option('--images', type=click.STRING, default=None)
 def NotionUpload(title, tag, video, images):
     print("Notion Uploader will upload with these:")
     print(title, end=' ')
@@ -74,4 +78,7 @@ def NotionUpload(title, tag, video, images):
     # https://drive.google.com/uc?id=1wU0H_5M0CneRBjc-V7YdBbImg9COSB1x
 
 if __name__ == '__main__':
-    NotionUpload()
+    for item in DATA:
+        params = item.split('\t')
+        print(params)
+        NotionUpload(params[0], params[3], params[1], params[2])

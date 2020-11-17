@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="fe71298d-af72-4d64-a6be-50b935d59ead" name="NotionUploaderAzure">
-        <fileTransfer rootFolder="/home/azureuser" accessType="SFTP" host="20.194.28.66" port="22" sshConfigId="f5f300e0-eece-471a-a9f0-6ae3d5d7ee90" sshConfig="azureuser@20.194.28.66:22 key" keyPair="true">
+        <fileTransfer rootFolder="/home/azureuser" accessType="SFTP" sshConfigId="f5f300e0-eece-471a-a9f0-6ae3d5d7ee90" sshConfig="azureuser@20.194.28.66:22 key">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>

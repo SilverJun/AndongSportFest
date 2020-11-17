@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="NotionUploaderAzure" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData" autoUpload="Always" serverName="azureuser@notionuploader.koreacentral.cloudapp.azure.com:22 key" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
       <paths name="NotionUploaderAzure">
         <serverdata>
@@ -9,6 +9,21 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="azureuser@20.194.28.66:22 key">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/azureuser/NotionUploadServer" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="azureuser@notionuploader.koreacentral.cloudapp.azure.com:22 key">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/azureuser/notion_uploader" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
     </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
   </component>
 </project>
